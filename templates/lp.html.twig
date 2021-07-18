@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>YugiLP {{ lp.ref }}</title>
-	<link rel="stylesheet" href="http://ns3009373.ip-37-187-4.eu/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="http://ns3009373.ip-37-187-4.eu/css/lp.css" />
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/lp.css" />
     </head>
     <body>
       <div class="container">
@@ -16,7 +16,7 @@
 			</div>
 			<div class="row lps">
 			  <div class="life">
-				<span class="lifecounter">{{ lp.lpa }}</span>
+				<span class="lifecounter" id="lifea">{{ lp.lpa }}</span>
 			  </div>
 			</div>
 		  </div>
@@ -27,13 +27,22 @@
 			</div>
 			<div class="row lps">
 				<div class="life">
-					<span class="lifecounter">{{ lp.lpb }}</span>
+					<span class="lifecounter" id="lifeb">{{ lp.lpb }}</span>
 				</div>
 			</div>
 		  </div>
 		  
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<input type="text" value="" />
+			</div>
+		</div>
       </div>
 	  
+	  
+	  <script src="/js/jquery-3.6.0.min.js"></script>
+	  <script src="/js/countUp.js"></script>
+	  <script src="/js/yugiLP.js"></script>
     </body>
 </html>
