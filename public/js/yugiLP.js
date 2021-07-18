@@ -28,8 +28,12 @@ $(document).on('keypress',function(e) {
 	    playera.update(8000);
 	    playerb.update(8000);	    
 	} else {
-	    var val = $('#lifea').text() - 4000;
+	    var lifea = $('#lifea').text();
+	    var lifeb = $('#lifeb').text();
+	    var inter = $('#lpinteract').val();
 
+	    var val = parseInt(lifea) + parseInt(inter);
+	    
 	    if (val == 0) {
 		ptsz.play();
 		playera.update(val);
@@ -38,6 +42,7 @@ $(document).on('keypress',function(e) {
 		playera.update(val);
 	    }
 
+	    $('#lpinteract').val('');
 	}
     }
 });
