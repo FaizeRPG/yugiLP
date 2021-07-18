@@ -3,46 +3,51 @@
     <head>
         <meta charset="UTF-8">
         <title>YugiLP {{ lp.ref }}</title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/lp.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/bootstrap-toggle.min.css">
+		<link rel="stylesheet" href="/css/lp.css" />
     </head>
     <body>
-      <div class="container">
-		<div class="row">
-		
-		  <div class="col-md-6">
-			<div class="row names">
-			  <div class="pname">{{ pa }}</div>
-			</div>
-			<div class="row lps">
-			  <div class="life">
-				<span class="lifecounter" id="lifea">{{ lp.lpa }}</span>
+		<div class="container">
+			<div class="row">
+			
+			  <div class="col-md-6">
+				<div class="row names">
+				  <div class="pname">{{ pa }}</div>
+				</div>
+				<div class="row lps">
+				  <div class="life">
+					<span class="lifecounter" id="lifea">{{ lp.lpa }}</span>
+				  </div>
+				</div>
 			  </div>
+			  
+			  <div class="col-md-6">
+				<div class="row names">
+				  <div class="pname">{{ pb }}</div>
+				</div>
+				<div class="row lps">
+					<div class="life">
+						<span class="lifecounter" id="lifeb">{{ lp.lpb }}</span>
+					</div>
+				</div>
+			  </div>
+			  
 			</div>
-		  </div>
-		  
-		  <div class="col-md-6">
-			<div class="row names">
-			  <div class="pname">{{ pb }}</div>
-			</div>
-			<div class="row lps">
-				<div class="life">
-					<span class="lifecounter" id="lifeb">{{ lp.lpb }}</span>
+			<div class="row">
+				<div class="col-md-2">
+					<input type="checkbox" checked id="activeplayer" data-toggle="toggle" data-on="{{ pa }}" data-off="{{ pb }}" data-onstyle="success" data-offstyle="danger">
+				</div>
+				<div class="col-md-10">
+					<input type="number" id="lpinteract" value="" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
 				</div>
 			</div>
-		  </div>
-		  
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<input type="text" id="lpinteract" value="" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
-			</div>
-		</div>
-      </div>
-	  
-	  
-	  <script src="/js/jquery-3.6.0.min.js"></script>
-	  <script src="/js/countUp.js"></script>
-	  <script src="/js/yugiLP.js"></script>
+	
+		<script>const ref = '{{ lp.ref }}';</script>
+		<script src="/js/jquery-3.6.0.min.js"></script>
+		<script src="/js/bootstrap-toggle.min.js"></script>
+		<script src="/js/countUp.js"></script>
+		<script src="/js/yugiLP.js"></script>
     </body>
 </html>

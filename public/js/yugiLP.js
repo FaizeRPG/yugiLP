@@ -20,33 +20,118 @@ if (!playerb.error) {
     playerb.start();
 }
 
+/** initiate toggle **/
+var player = 'A';
+
+$(function() {
+    $('#activeplayer').bootstrapToggle();
+
+    $('#activeplayer').change(function() {
+	player == 'A' ? player = 'B' : player = 'A';
+    })
+})
+
+
+/** keyboard listener **/
+
 $(document).on('keypress',function(e) {
+   var key = e.keyCode;
+	
+    document.getElementById("lpinteract").focus();
+	
+    if(e.which == 13) { //enter
+	
+		if ($('#lifea').text() == 0 || $('#lifeb').text() == 0) {
+			/** set default **/
+			ptsd.play();
+			playera.update(8000);
+			playerb.update(8000);
+			
+			setLP(ref, 'A', 8000);
+			setLP(ref, 'B', 8000);
+		} else {
+			/** calcul lp **/
+			var inter = $('#lpinteract').val();
+			var life = 0;
+			
+			if (player == 'A')
+				life = $('#lifea').text();
+			else
+				life = $('#lifeb').text();
 
-    if(e.which == 13) {
-	if ($('#lifea').text() == 0 || $('#lifeb').text() == 0) {
-	    ptsd.play();
-	    playera.update(8000);
-	    playerb.update(8000);	    
-	} else {
-	    var lifea = $('#lifea').text();
-	    var lifeb = $('#lifeb').text();
-	    var inter = $('#lpinteract').val();
+			if (inter == '')	    
+				inter = '-'+(parseInt(life)/2);
+			
+			life = parseInt(life) + parseInt(inter);
+			
+			if (life <= 0) {
+				ptsz.play();
+				life = 0;
+			} else {
+				ptsd.play();
+			}
+				
+			if (player == 'A')
+				playera.update(life);
+			else
+				playerb.update(life);
+			
+			/** envoie ajax **/
+			setLP(ref, player, life);
 
-	    if (inter == '') {
-		inter = '-'+(parseInt(lifea)/2);
-	    }
-	    
-	    var val = parseInt(lifea) + parseInt(inter);
-	    
-	    if (val == 0) {
-		ptsz.play();
-		playera.update(val);
-	    } else {
-		ptsd.play();
-		playera.update(val);
-	    }
-
-	    $('#lpinteract').val('');
-	}
+			/** reset champ saisie **/
+			$('#lpinteract').val('');
+		}
     }
+	
+    if(e.which == 32) {//space
+		e.preventDefault();
+		getLP(ref);
+	}
 });
+
+function setLP(ref, player, val) {
+	$.ajax({
+		type: "POST",
+		url: '/api/yugilp/'+ref+'/'+player+'/'+parseInt(val),
+	});
+}
+
+function updateLP(lpa, lpb) {
+	lifea = $('#lifea').text();
+	lifeb = $('#lifea').text();
+	
+	if (parseInt(lpa) != parseInt(lifea) || parseInt(lpb) != parseInt(lifeb)) {
+	
+		if (lpa == 0 || lpb == 0) {
+			ptsz.play();
+		} else {
+			ptsd.play();
+		}
+		
+		if (parseInt(lpa) != parseInt(lifea)) {
+			playera.update(lpa);
+		}
+		
+		if (parseInt(lpb) != parseInt(lifeb)) {
+			playerb.update(lpb);
+		}
+	}
+}
+    
+/** futur socket **/
+function getLP(ref) {
+    $.ajax({
+		type: 'POST',
+		url: '/api/yugilp/'+ref,
+		success: function(data) {
+			updateLP(data["1"], data["2"]);
+		}
+    });
+}
+
+/*$(document).ready(function() {
+    while(1) {
+		setTimeout(getLp(ref), 1000);
+    }
+});*/
