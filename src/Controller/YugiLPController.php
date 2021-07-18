@@ -22,9 +22,9 @@ class YugiLPController extends AbstractController
     }
 
     /**
-     * @Route("/yugilp/{ref}", name="yugi_lp_ref")
+     * @Route("/yugilp/{ref}/{playera}/{playerb}", name="yugi_lp_ref")
      */
-    public function show(string $ref): Response
+    public function show(string $ref, string $playera = 'A', string $playerb = 'B'): Response
     {
         $lp = $this->getDoctrine()
 	         ->getRepository(YugiLP::class)
@@ -39,6 +39,10 @@ class YugiLPController extends AbstractController
 	   $em->flush();
 	}
 
-        return new Response('Check out this great LP: '.$lp->getLpa());
+        return $this->render('lp.html.twig', [
+	       'lp' => $lp,
+	       "pa" => $playera,
+	       "pb" => $playerb
+	]);
     }
 }
