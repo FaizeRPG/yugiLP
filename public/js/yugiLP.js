@@ -33,7 +33,7 @@ $(document).on('keypress',function(e) {
 	    var inter = $('#lpinteract').val();
 
 	    if (inter == '') {
-		inter = parseInt(lifea)/2;
+		inter = '-'+(parseInt(lifea)/2);
 	    }
 	    
 	    var val = parseInt(lifea) + parseInt(inter);
