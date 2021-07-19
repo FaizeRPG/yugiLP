@@ -22,15 +22,21 @@ if (!playerb.error) {
 
 /** initiate toggle **/
 var player = 'A';
+var autorefresh = false;
+var LOOP = null;
 
 $(function() {
     $('#activeplayer').bootstrapToggle();
+    $('#autorefresh').bootstrapToggle();
 
     $('#activeplayer').change(function() {
-	player == 'A' ? player = 'B' : player = 'A';
-    })
-})
+		player == 'A' ? player = 'B' : player = 'A';
+    });
 
+    $('#autorefresh').change(function() {
+		updateRefresh();
+    });
+});
 
 /** keyboard listener **/
 
@@ -99,7 +105,7 @@ function setLP(ref, player, val) {
 
 function updateLP(lpa, lpb) {
 	lifea = $('#lifea').text();
-	lifeb = $('#lifea').text();
+	lifeb = $('#lifeb').text();
 	
 	if (parseInt(lpa) != parseInt(lifea) || parseInt(lpb) != parseInt(lifeb)) {
 	
@@ -120,7 +126,17 @@ function updateLP(lpa, lpb) {
 }
     
 /** futur socket **/
-function getLP(ref) {
+function updateRefresh() {
+	if (autorefresh) {
+		autorefresh = false;
+		clearInterval(LOOP);
+	} else {
+		autorefresh = true;
+		LOOP = setInterval(getLP, 5000);
+	}
+}
+
+function getLP() {
     $.ajax({
 		type: 'POST',
 		url: '/api/yugilp/'+ref,

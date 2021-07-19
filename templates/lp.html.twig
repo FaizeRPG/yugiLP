@@ -9,8 +9,8 @@
     </head>
     <body>
 		<div class="container">
+		
 			<div class="row">
-			
 			  <div class="col-md-6">
 				<div class="row names">
 				  <div class="pname">{{ pa }}</div>
@@ -32,16 +32,36 @@
 					</div>
 				</div>
 			  </div>
-			  
 			</div>
+			
 			<div class="row">
-				<div class="col-md-2">
-					<input type="checkbox" checked id="activeplayer" data-toggle="toggle" data-on="{{ pa }}" data-off="{{ pb }}" data-onstyle="success" data-offstyle="danger">
-				</div>
-				<div class="col-md-10">
-					<input type="number" id="lpinteract" value="" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
+				<div class="col-md-12">
+					<div class="myCounter">
+						<div class="myToggle">
+							<input type="checkbox" checked id="activeplayer" data-toggle="toggle" data-on="{{ pa }}" data-off="{{ pb }}" data-onstyle="success" data-offstyle="danger" />
+						</div>
+						<div class="mySearch">
+							<input type="number" id="lpinteract" value="" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
+						</div>
+					</div>
 				</div>
 			</div>
+			
+			<div class="row magtop">
+				<div class="col-md-3 center">
+					<input type="checkbox" id="autorefresh" data-toggle="toggle" data-on="Auto" data-off="Manuel" data-onstyle="info" data-offstyle="warning" data-width="100" data-height="75" />
+				</div>
+				<div class="col-md-3 center">
+					<input type="checkbox" id="" data-toggle="toggle" data-on="None" data-off="None" data-onstyle="info" data-offstyle="warning" data-width="100" data-height="75" />
+				</div>
+				<div class="col-md-3 center">
+					<input type="checkbox" id="" data-toggle="toggle" data-on="None" data-off="None" data-onstyle="info" data-offstyle="warning" data-width="100" data-height="75" />
+				</div>
+				<div class="col-md-3 center">
+					<input type="checkbox" id="" data-toggle="toggle" data-on="None" data-off="None" data-onstyle="info" data-offstyle="warning" data-width="100" data-height="75" />
+				</div>
+			</div>
+			
 		</div>
 	
 		<script>const ref = '{{ lp.ref }}';</script>
